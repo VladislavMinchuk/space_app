@@ -1,5 +1,5 @@
 class AstronautSerializer < ActiveModel::Serializer
-  attributes :first_name, :last_name, :birthday
+  attributes :id, :first_name, :last_name, :birthday
   belongs_to :country
 
   class CountrySerializer < ActiveModel::Serializer

@@ -44,3 +44,6 @@ gem 'dotenv-rails'
 
 # ActiveModelSerializers
 gem 'active_model_serializers', '~> 0.10.0'
+
+# paginator for ORM
+gem 'kaminari'

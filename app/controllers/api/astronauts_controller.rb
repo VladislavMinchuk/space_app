@@ -1,7 +1,9 @@
 module Api
   class AstronautsController < ApplicationController
     def index
-      render json: Astronaut.order('created_at DESC')
+      astronautList = Astronaut::AstronautList.new(params)
+      
+      render json: astronautList.list
     end
 
     def show
