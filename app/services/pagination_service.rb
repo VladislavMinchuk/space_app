@@ -2,7 +2,7 @@ class PaginationService
 
   def initialize(model, page, per_page)
     @page = page || 1           # Default
-    @per_page = per_page || 2   # Default
+    @per_page = per_page || 5   # Default
     @model = model
   end
 

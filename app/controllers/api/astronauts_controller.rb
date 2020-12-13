@@ -1,9 +1,7 @@
 module Api
   class AstronautsController < ApplicationController
     def index
-      astronautList = Astronaut::AstronautList.new(params)
-      
-      render json: astronautList.list
+      render json: Astronaut::AstronautList.new(params).list
     end
 
     def show
@@ -12,16 +10,25 @@ module Api
 
     def create
       astronaut = Astronaut.create(astronaut_params)
-      if astronaut.errors.any?
-        return render json: { errors: astronaut.errors }
-      end
-      render json: astronaut
+      
+      result = astronaut.errors.any? ? { errors: astronaut.errors } : astronaut
+      
+      render json: result
+    end
+    
+    def update
+      astronaut = Astronaut.find(params[:id])
+      astronaut.update(astronaut_params)
+
+      result = astronaut.errors.any? ? { errors: astronaut.errors } : astronaut
+      
+      render json: result
     end
 
     private
 
-      def astronaut_params
-        params.require(:astronaut).permit(:first_name, :last_name, :birthday, :country_id)
-      end
+    def astronaut_params
+      params.require(:astronaut).permit(:first_name, :last_name, :birthday, :country_id)
+    end
   end
 end
