@@ -1,10 +1,11 @@
-class FiltersService < PaginationService
+# @model, @page, @per_page - from PaginationService class
+
+class PaginatedFiltersService < PaginationService
 
   def initialize(model, filters_params, page, per_page)
-    @model = model
     @filters_params = filters_params
-    @page = page
-    @per_page = per_page
+
+    super(model, page, per_page)
   end
 
   def filtered_list
