@@ -1,7 +1,9 @@
 module Api
   class AstronautsController < ApplicationController
     def index
-      render json: Astronaut::AstronautList.new(astronaut_filters_params).list
+      astronaut_list = Astronaut::AstronautList.new(params, AstronautSerializer)
+
+      render json: astronaut_list.list
     end
 
     def show
@@ -31,8 +33,5 @@ module Api
       params.require(:astronaut).permit(:first_name, :last_name, :birthday, :country_id)
     end
 
-    def astronaut_filters_params
-      params.permit(:first_name, :last_name, :birthday, :country_id, :id)
-    end
   end
 end
