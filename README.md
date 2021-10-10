@@ -1,24 +1,17 @@
-# README
+### Prerequisites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The setups steps expect following tools installed on the system:
 
-Things you may want to cover:
+- Github
+- Ruby 2.7.1
+- Rails 6.0.4.1
+- PostgreSQL 13.4
 
-* Ruby version
+### Set up Database
+Creating ```user_space``` with password ```password``` Database Role for Your Application.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Set up Rails application
+Install gems: ```bundle install```
+Create DB: ```rails db:create```
+Migrate DB: ```rails db:migrate```
+Seed DB: ```rails db:seed```
