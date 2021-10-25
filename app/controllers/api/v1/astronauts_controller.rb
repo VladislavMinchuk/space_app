@@ -3,14 +3,7 @@ module Api
     class AstronautsController < ApplicationController
 
       def index
-        astronauts = Astronaut.all
-
-        pagination = create_pagination_response(astronaut_filters_params[:page], astronaut_filters_params[:per_page], astronauts)
-
-        render json: {
-          pagination: pagination[:pagination],
-          astronauts: ActiveModelSerializers::SerializableResource.new(pagination[:items], each_serializer: AstronautSerializer),
-        }
+        render Astronauts::List.call(astronaut_filters_params[:page], astronaut_filters_params[:per_page])
       end
 
       def show

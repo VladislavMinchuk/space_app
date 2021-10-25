@@ -1,30 +1,33 @@
 class PaginationService
+  PAGE = 1
+  PER_PAGE = 20
+
   def initialize(page, per_page, modelItem)
-    @page = page || 1
-    @per_page = per_page || 20
-    @model = modelItem.page(page).per(per_page)
+    @page = page || PAGE
+    @per_page = per_page || PER_PAGE
+    @model = modelItem
   end
 
   def create_pagin_object
     {
-      current: @model.current_page,
+      current: paginated_items.current_page,
       previous: prev_page,
       next: next_page,
       per_page: @per_page,
-      pages: @model.total_pages,
-      count: @model.total_count
+      pages: paginated_items.total_pages,
+      count: paginated_items.total_count
     }
   end
 
   def next_page
-    @model.current_page == @model.total_pages ? nil : @model.current_page.next
+    paginated_items.current_page == paginated_items.total_pages ? nil : paginated_items.current_page.next
   end
 
   def prev_page
-    @model.current_page > 1 ? @model.current_page.pred : nil
+    paginated_items.current_page > 1 ? paginated_items.current_page.pred : nil
   end
 
-  def items
-    @model
+  def paginated_items
+    @model.page(@page).per(@per_page)
   end
 end
